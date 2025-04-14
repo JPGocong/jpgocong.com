@@ -5,5 +5,280 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Joseph Gocong | Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
-  ...
+  <style>
+    :root {
+      --red-dark: #8F2C38;
+      --red: #DB394C;
+      --turquoise: #2EDBB5;
+      --orange-dark: #8F5610;
+      --orange: #DB8823;
+      --bg-light: #ffffff;
+      --text-light: #222222;
+      --bg-dark: #1e1e1e;
+      --text-dark: #eeeeee;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--text-light);
+      background: var(--bg-light);
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.dark-mode {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 960px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      border-radius: 20px;
+      position: relative;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero,
+    .project-card,
+    .contact {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .hero {
+      text-align: center;
+      background: var(--turquoise);
+      color: var(--red-dark);
+      padding: 100px 20px;
+      transition: background 0.4s ease;
+      border-radius: 20px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    .dark-toggle {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .cta-buttons .btn,
+    .btn,
+    .btn-outline {
+      margin: 10px;
+      padding: 12px 24px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      display: inline-block;
+      transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    }
+
+    .btn {
+      background: var(--red-dark);
+      color: white;
+    }
+
+    .btn:hover {
+      background: var(--orange);
+      transform: scale(1.05);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--red-dark);
+      color: var(--red-dark);
+      background: white;
+    }
+
+    .btn-outline:hover {
+      background: var(--red-dark);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .btn-teal {
+      background: var(--turquoise);
+      color: var(--red-dark);
+      border: none;
+    }
+
+    .btn-teal:hover {
+      background: var(--orange);
+      color: var(--red-dark);
+    }
+
+    .about-text h2,
+    .work h2,
+    .contact h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .work-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .project-card {
+      flex: 1 1 calc(33% - 20px);
+      background: #f2f2f2;
+      padding: 20px;
+      border-radius: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-card:nth-child(1) {
+      background: var(--orange);
+      color: white;
+    }
+
+    .project-card:nth-child(2) {
+      background: var(--red);
+      color: white;
+    }
+
+    .project-card:nth-child(3) {
+      background: var(--orange-dark);
+      color: white;
+    }
+
+    .link {
+      color: var(--red-dark);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+
+    .contact {
+      text-align: center;
+      background: var(--red);
+      color: var(--turquoise);
+      border-radius: 20px;
+    }
+
+    .contact .btn {
+      background: var(--red-dark);
+      color: white;
+    }
+
+    .contact .btn-outline {
+      background: var(--turquoise);
+      color: var(--red-dark);
+      border: none;
+    }
+
+    .contact .btn-outline:hover {
+      background: var(--orange);
+      color: var(--red-dark);
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    // Scroll animation
+    document.addEventListener("DOMContentLoaded", () => {
+      const sections = document.querySelectorAll("section");
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero visible">
+    <h1>Design with purpose.</h1>
+    <p>Multimedia. Motion. Strategy. Visual systems built to scale.</p>
+    <div class="cta-buttons">
+      <a href="#work" class="btn">View My Work</a>
+      <a href="#about" class="btn-outline">About Me</a>
+    </div>
+    <div class="dark-toggle">
+      <button onclick="toggleDarkMode()" class="btn-outline">Dark Mode</button>
+    </div>
+  </section>
+
+  <!-- About Preview -->
+  <section id="about" class="about">
+    <div class="about-text">
+      <h2>Hi, I’m Joseph Gocong.</h2>
+      <p>I’m a visual designer and motion specialist with 20+ years of experience delivering impactful, scalable media across defense, education, and commercial industries. I combine motion, strategy, and design thinking to make complex ideas easy to understand and hard to ignore.</p>
+      <a href="#contact" class="link">Read More About Me →</a>
+    </div>
+  </section>
+
+  <!-- Featured Work -->
+  <section id="work" class="work">
+    <h2>Featured Work</h2>
+    <div class="work-grid">
+      <div class="project-card">
+        <h3>Motion Reel</h3>
+        <p>High-impact storytelling through 2D/3D animation and editorial design.</p>
+      </div>
+      <div class="project-card">
+        <h3>Training Systems</h3>
+        <p>Scalable instructional media for 800K users across the Air Force.</p>
+      </div>
+      <div class="project-card">
+        <h3>Brand Identity</h3>
+        <p>Design systems built for clarity, culture, and cross-platform reach.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section id="contact" class="contact">
+    <h2>Let’s Build Something Meaningful.</h2>
+    <a href="mailto:youremail@example.com" class="btn">Contact Me</a>
+    <a href="/resume.pdf" class="btn-outline">Download Resume</a>
+  </section>
+
+</body>
 </html>
